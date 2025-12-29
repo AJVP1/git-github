@@ -8,7 +8,6 @@
   <body>
     <header>
       <h1>Comandos de Git y GitHub</h1>
-      <h2>hOLAAAA</h2>
       <p>Guía rápida, organizada por tareas, con notas y advertencias.</p>
     </header>
 
@@ -143,6 +142,97 @@ git lg</pre
         </details>
       </section>
 
+      <section id="ramas">
+        <h2>Ramas (branch, checkout, merge, rebase)</h2>
+
+        <ul>
+          <li><code>git branch</code>: ver ramas y rama actual.</li>
+          <li>
+            <code>git branch nombre</code>: crear rama (no cambia a ella).
+          </li>
+          <li><code>git checkout rama</code>: moverse a otra rama.</li>
+          <li>
+            <code>git checkout -b nombre</code>: crear y moverse a una nueva
+            rama.
+          </li>
+          <li><code>git branch -m viejo nuevo</code>: renombrar rama local.</li>
+          <li><code>git branch -D nombre</code>: borrar rama local.</li>
+          <li>
+            <code>git merge rama</code>: fusiona <em>rama</em> en la rama
+            actual.
+          </li>
+          <li>
+            <code>git rebase rama_base</code>: reaplica commits encima de otra
+            base (historial más lineal).
+          </li>
+        </ul>
+
+        <h3>Ramas remotas</h3>
+        <ul>
+          <li><code>git branch -r</code>: ver ramas remotas.</li>
+          <li><code>git branch -a</code>: ver ramas locales y remotas.</li>
+        </ul>
+      </section>
+
+      <section id="deshacer">
+        <h2>Deshacer y recuperar (restore, reset, revert, amend)</h2>
+        <ul>
+          <li>
+            <code>git restore archivo</code>: revierte cambios no confirmados en
+            un archivo.
+          </li>
+          <li>
+            <code>git restore .</code>: revierte cambios no confirmados en todo.
+          </li>
+          <li>
+            <code>git restore --staged archivo</code>: saca un archivo del
+            staging area.
+          </li>
+          <li>
+            <code>git restore --staged .</code>: saca todos los archivos del
+            staging area.
+          </li>
+          <li>
+            <code>git reset --soft commit</code>: mueve HEAD, mantiene staging y
+            cambios.
+          </li>
+          <li>
+            <code>git reset --mixed commit</code>: mueve HEAD, mantiene cambios
+            pero limpia staging (por defecto).
+          </li>
+          <li>
+            <code>git reset --hard commit</code>: vuelve a ese commit y descarta
+            cambios locales.
+          </li>
+          <li>
+            <code>git revert commit</code>: crea un nuevo commit que revierte
+            los cambios.
+          </li>
+          <li>
+            <code>git commit --amend -m "mensaje"</code>: modifica el último
+            commit (mensaje y/o contenido).
+          </li>
+          <li>
+            <code>git cherry-pick commit</code>: aplica un commit específico
+            sobre la rama actual.
+          </li>
+        </ul>
+
+        <details>
+          <summary>Advertencias importantes</summary>
+          <ul>
+            <li>
+              <code>git reset --hard</code> descarta cambios locales. Úsalo con
+              cuidado.
+            </li>
+            <li>
+              <code>git revert</code> es más seguro en equipo porque no
+              reescribe historial; <code>reset</code> sí puede reescribirlo.
+            </li>
+          </ul>
+        </details>
+      </section>
+
       <section id="historial">
         <h2>Ver historial y comparar cambios</h2>
         <ul>
@@ -220,117 +310,6 @@ git switch main</pre
             por rango.
           </li>
         </ul>
-      </section>
-
-      <section id="ramas">
-        <h2>Ramas y merges</h2>
-
-        <h3>Ver y crear ramas</h3>
-        <ul>
-          <li><code>git branch</code>: ver ramas y rama actual.</li>
-          <li>
-            <code>git branch nombre</code>: crear rama (no cambia a ella).
-          </li>
-          <li><code>git switch rama</code>: moverse a una rama.</li>
-          <li>
-            <code>git switch -c nombre</code>: crear rama y moverse a ella.
-          </li>
-          <li>
-            <code>git checkout rama</code>: equivalente clásico a
-            <code>git switch rama</code>.
-          </li>
-          <li>
-            <code>git checkout -b nombre</code>: equivalente clásico a
-            <code>git switch -c nombre</code>.
-          </li>
-          <li><code>git branch -m viejo nuevo</code>: renombrar rama local.</li>
-          <li><code>git branch -D nombre</code>: borrar rama local.</li>
-        </ul>
-
-        <h3>Fusionar cambios</h3>
-        <ul>
-          <li>
-            <code>git merge rama</code>: fusiona <strong>rama</strong> en la
-            rama actual.
-          </li>
-          <li>
-            <code>git rebase rama_base</code>: reaplica commits encima de otra
-            base (historial más lineal).
-          </li>
-        </ul>
-
-        <details>
-          <summary>Nota: <code>git merge</code> no “funciona solo”</summary>
-          <p>
-            <code>git merge</code> necesita un objetivo (una rama o referencia).
-            Ejemplos:
-          </p>
-          <pre>
-git merge feature/mi-cambio
-git merge origin/main</pre
-          >
-        </details>
-
-        <h3>Ramas remotas</h3>
-        <ul>
-          <li><code>git branch -r</code>: ver ramas remotas.</li>
-          <li><code>git branch -a</code>: ver ramas locales y remotas.</li>
-        </ul>
-      </section>
-
-      <section id="deshacer">
-        <h2>Deshacer y recuperar</h2>
-        <ul>
-          <li>
-            <code>git restore archivo</code>: revierte cambios no confirmados en
-            un archivo.
-          </li>
-          <li>
-            <code>git restore .</code>: revierte cambios no confirmados en todo.
-          </li>
-          <li>
-            <code>git restore --staged archivo</code>: saca un archivo del
-            staging.
-          </li>
-          <li>
-            <code>git reset --soft commit</code>: mueve HEAD, mantiene staging y
-            cambios.
-          </li>
-          <li>
-            <code>git reset --mixed commit</code>: mueve HEAD, mantiene cambios
-            pero limpia staging (por defecto).
-          </li>
-          <li>
-            <code>git reset --hard commit</code>: vuelve a ese commit y descarta
-            cambios locales.
-          </li>
-          <li>
-            <code>git revert commit</code>: crea un nuevo commit que revierte
-            los cambios.
-          </li>
-          <li>
-            <code>git commit --amend -m "mensaje"</code>: modifica el último
-            commit (mensaje y/o contenido).
-          </li>
-          <li>
-            <code>git cherry-pick commit</code>: aplica un commit específico
-            sobre la rama actual.
-          </li>
-        </ul>
-
-        <details>
-          <summary>Advertencias importantes</summary>
-          <ul>
-            <li>
-              <code>git reset --hard</code> descarta cambios locales. Úsalo con
-              cuidado.
-            </li>
-            <li>
-              <code>git revert</code> es más seguro en equipo porque no
-              reescribe historial; <code>reset</code> sí puede reescribirlo.
-            </li>
-          </ul>
-        </details>
       </section>
 
       <section id="stash">

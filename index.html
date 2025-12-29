@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Comandos de Git y GitHub</title>
+  </head>
+  <body>
+    <header>
+      <h1>Comandos de Git y GitHub</h1>
+      <p>Guía rápida, organizada por tareas, con notas y advertencias.</p>
+    </header>
+
+    <nav aria-label="Tabla de contenido">
+      <h2>Contenido</h2>
+      <ul>
+        <li><a href="#notas">Notas y convenciones</a></li>
+        <li><a href="#config">Instalación y configuración</a></li>
+        <li><a href="#flujo">Flujo típico de trabajo</a></li>
+        <li><a href="#basicos">Comandos básicos</a></li>
+        <li><a href="#historial">Ver historial y comparar cambios</a></li>
+        <li><a href="#tags">Tags / etiquetas</a></li>
+        <li><a href="#auditoria">Auditoría: quién hizo qué</a></li>
+        <li><a href="#ramas">Ramas y merges</a></li>
+        <li><a href="#deshacer">Deshacer y recuperar</a></li>
+        <li><a href="#stash">Stash</a></li>
+        <li><a href="#ssh">SSH (GitHub)</a></li>
+        <li><a href="#remoto">Trabajo remoto con GitHub</a></li>
+        <li><a href="#buscar">Buscar en el código</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <section id="notas">
+        <h2>Notas y convenciones</h2>
+        <ul>
+          <li>
+            Cuando veas <strong>archivo</strong>, reemplázalo por el nombre real
+            (incluida la extensión si aplica).
+          </li>
+          <li>
+            Cuando veas <strong>rama</strong>, reemplázalo por el nombre real de
+            la rama.
+          </li>
+          <li>
+            Cuando veas <strong>commit</strong>, se refiere al hash del commit
+            (se obtiene con <code>git log</code>).
+          </li>
+          <li>
+            Git ya viene instalado por defecto dentro de MacOS y la mayoría de
+            distribuciones de Linux.
+          </li>
+          <li>
+            Plantillas de <code>.gitignore</code>: busca “github gitignore
+            templates”.
+          </li>
+        </ul>
+      </section>
+
+      <section id="config">
+        <h2>Instalación y configuración</h2>
+        <ul>
+          <li>
+            <code>git --version</code>: verificar que Git está instalado y ver
+            versión.
+          </li>
+          <li>
+            <code>git config --global init.defaultBranch main</code>: define
+            <code>main</code> como rama inicial por defecto.
+          </li>
+          <li>
+            <code>git config --global user.email "tu@email.com"</code>:
+            configura email.
+          </li>
+          <li>
+            <code>git config --global user.name "Tu Nombre"</code>: configura
+            nombre.
+          </li>
+          <li><code>git config --list</code>: lista configuración actual.</li>
+          <li><code>git --help</code>: ayuda general.</li>
+        </ul>
+      </section>
+
+      <section id="flujo">
+        <h2>Flujo típico de trabajo</h2>
+        <pre>
+# primera vez
+git clone URL
+
+# día a día
+git status
+git add .
+git commit -m "mensaje"
+git pull --rebase
+git push</pre
+        >
+
+        <details>
+          <summary>Si trabajas con ramas</summary>
+          <pre>
+git switch -c feature/mi-cambio
+# ... trabajas ...
+git add .
+git commit -m "agrego X"
+git push -u origin feature/mi-cambio</pre
+          >
+        </details>
+      </section>
+
+      <section id="basicos">
+        <h2>Comandos básicos</h2>
+        <ul>
+          <li>
+            <code>git init</code>: inicializa un repositorio en la carpeta
+            actual.
+          </li>
+          <li>
+            <code>git status</code>: muestra el estado (untracked, staged,
+            etc.).
+          </li>
+          <li><code>git add archivo</code>: añade un archivo al staging.</li>
+          <li><code>git add .</code>: agrega todo al staging.</li>
+          <li>
+            <code>git commit -m "mensaje"</code>: confirma lo del staging.
+          </li>
+          <li>
+            <code>git rm --cached archivo</code>: remueve del staging (sin
+            borrar el archivo del disco).
+          </li>
+          <li>
+            <code>git config --global alias.nombre "comando"</code>: crea un
+            alias.
+          </li>
+        </ul>
+
+        <details>
+          <summary>Ejemplo de alias</summary>
+          <pre>
+git config --global alias.lg "log --all --graph --decorate --oneline"
+git lg</pre
+          >
+        </details>
+      </section>
+
+      <section id="historial">
+        <h2>Ver historial y comparar cambios</h2>
+        <ul>
+          <li><code>git log</code>: lista commits (más recientes primero).</li>
+          <li>
+            <code>git log --stat</code>: commits con resumen de cambios por
+            archivo.
+          </li>
+          <li>
+            <code>git log --all --graph --decorate --oneline</code>: historial
+            compacto y visual.
+          </li>
+          <li><code>git show commit</code>: muestra detalles de un commit.</li>
+          <li>
+            <code>git diff commit1 commit2</code>: compara diferencias entre
+            commits.
+          </li>
+        </ul>
+
+        <details>
+          <summary>Volver a un commit (modo detached HEAD)</summary>
+          <p>
+            <code>git checkout commit</code> o
+            <code>git switch --detach commit</code>
+            te deja en “detached HEAD” (no estás en una rama). Para volver:
+            <code>git switch rama</code>.
+          </p>
+          <pre>
+git switch --detach 1a2b3c4
+# mirar / probar algo...
+git switch main</pre
+          >
+        </details>
+      </section>
+
+      <section id="tags">
+        <h2>Tags / etiquetas</h2>
+        <ul>
+          <li>
+            <code>git tag -a tag -m "mensaje" commit</code>: crea tag anotado
+            sobre un commit.
+          </li>
+          <li><code>git tag</code>: ver etiquetas existentes.</li>
+          <li>
+            <code>git show tag</code>: ver el commit referenciado por el tag.
+          </li>
+          <li><code>git show-ref --tags</code>: ver referencias de tags.</li>
+          <li><code>git push origin --tags</code>: enviar tags al remoto.</li>
+          <li><code>git tag -d tag</code>: borrar tag local.</li>
+          <li>
+            <code>git push origin :refs/tags/tag</code>: borrar tag en remoto.
+          </li>
+        </ul>
+      </section>
+
+      <section id="auditoria">
+        <h2>Auditoría: quién hizo qué</h2>
+        <ul>
+          <li>
+            <code>git reflog</code>: historial de movimientos de HEAD (útil para
+            recuperar).
+          </li>
+          <li><code>git shortlog</code>: commits por autor.</li>
+          <li><code>git shortlog -sn</code>: cuántos commits por autor.</li>
+          <li>
+            <code>git shortlog -sn --all</code>: incluye referencias no
+            presentes en la rama actual.
+          </li>
+          <li>
+            <code>git shortlog -sn --all --no-merges</code>: excluye merges.
+          </li>
+          <li><code>git blame archivo</code>: quién modificó cada línea.</li>
+          <li>
+            <code>git blame archivo -L linea_inicial,linea_final</code>: blame
+            por rango.
+          </li>
+        </ul>
+      </section>
+
+      <section id="ramas">
+        <h2>Ramas y merges</h2>
+
+        <h3>Ver y crear ramas</h3>
+        <ul>
+          <li><code>git branch</code>: ver ramas y rama actual.</li>
+          <li>
+            <code>git branch nombre</code>: crear rama (no cambia a ella).
+          </li>
+          <li><code>git switch rama</code>: moverse a una rama.</li>
+          <li>
+            <code>git switch -c nombre</code>: crear rama y moverse a ella.
+          </li>
+          <li>
+            <code>git checkout rama</code>: equivalente clásico a
+            <code>git switch rama</code>.
+          </li>
+          <li>
+            <code>git checkout -b nombre</code>: equivalente clásico a
+            <code>git switch -c nombre</code>.
+          </li>
+          <li><code>git branch -m viejo nuevo</code>: renombrar rama local.</li>
+          <li><code>git branch -D nombre</code>: borrar rama local.</li>
+        </ul>
+
+        <h3>Fusionar cambios</h3>
+        <ul>
+          <li>
+            <code>git merge rama</code>: fusiona <strong>rama</strong> en la
+            rama actual.
+          </li>
+          <li>
+            <code>git rebase rama_base</code>: reaplica commits encima de otra
+            base (historial más lineal).
+          </li>
+        </ul>
+
+        <details>
+          <summary>Nota: <code>git merge</code> no “funciona solo”</summary>
+          <p>
+            <code>git merge</code> necesita un objetivo (una rama o referencia).
+            Ejemplos:
+          </p>
+          <pre>
+git merge feature/mi-cambio
+git merge origin/main</pre
+          >
+        </details>
+
+        <h3>Ramas remotas</h3>
+        <ul>
+          <li><code>git branch -r</code>: ver ramas remotas.</li>
+          <li><code>git branch -a</code>: ver ramas locales y remotas.</li>
+        </ul>
+      </section>
+
+      <section id="deshacer">
+        <h2>Deshacer y recuperar</h2>
+        <ul>
+          <li>
+            <code>git restore archivo</code>: revierte cambios no confirmados en
+            un archivo.
+          </li>
+          <li>
+            <code>git restore .</code>: revierte cambios no confirmados en todo.
+          </li>
+          <li>
+            <code>git restore --staged archivo</code>: saca un archivo del
+            staging.
+          </li>
+          <li>
+            <code>git reset --soft commit</code>: mueve HEAD, mantiene staging y
+            cambios.
+          </li>
+          <li>
+            <code>git reset --mixed commit</code>: mueve HEAD, mantiene cambios
+            pero limpia staging (por defecto).
+          </li>
+          <li>
+            <code>git reset --hard commit</code>: vuelve a ese commit y descarta
+            cambios locales.
+          </li>
+          <li>
+            <code>git revert commit</code>: crea un nuevo commit que revierte
+            los cambios.
+          </li>
+          <li>
+            <code>git commit --amend -m "mensaje"</code>: modifica el último
+            commit (mensaje y/o contenido).
+          </li>
+          <li>
+            <code>git cherry-pick commit</code>: aplica un commit específico
+            sobre la rama actual.
+          </li>
+        </ul>
+
+        <details>
+          <summary>Advertencias importantes</summary>
+          <ul>
+            <li>
+              <code>git reset --hard</code> descarta cambios locales. Úsalo con
+              cuidado.
+            </li>
+            <li>
+              <code>git revert</code> es más seguro en equipo porque no
+              reescribe historial; <code>reset</code> sí puede reescribirlo.
+            </li>
+          </ul>
+        </details>
+      </section>
+
+      <section id="stash">
+        <h2>Stash</h2>
+        <ul>
+          <li><code>git stash</code>: guarda cambios temporalmente.</li>
+          <li>
+            <code>git stash push -m "mensaje"</code>: stash con mensaje (forma
+            moderna).
+          </li>
+          <li><code>git stash list</code>: lista de stashes.</li>
+          <li>
+            <code>git stash pop</code>: aplica el último stash y lo elimina.
+          </li>
+          <li>
+            <code>git stash pop stash@{n}</code>: aplica un stash específico y
+            lo elimina.
+          </li>
+          <li>
+            <code>git stash apply stash@{n}</code>: aplica un stash específico
+            sin eliminarlo.
+          </li>
+          <li>
+            <code>git stash branch rama</code>: crea rama y aplica cambios del
+            último stash.
+          </li>
+          <li><code>git stash drop</code>: borra el último stash.</li>
+          <li>
+            <code>git stash drop stash@{n}</code>: borra un stash específico.
+          </li>
+          <li><code>git stash clear</code>: borra todos los stashes.</li>
+        </ul>
+      </section>
+
+      <section id="ssh">
+        <h2>SSH (GitHub)</h2>
+        <ol>
+          <li>
+            <code>ssh-keygen -t ed25519 -C "tu_correo@example.com"</code>: crear
+            llave SSH.
+          </li>
+          <li>Seleccionar dónde guardar la llave.</li>
+          <li>Colocar (opcional) una contraseña a la llave.</li>
+          <li>
+            <code>eval "$(ssh-agent -s)"</code>: iniciar/verificar agente SSH.
+          </li>
+          <li>
+            <code>ssh-add ~/.ssh/id_ed25519</code>: agregar llave privada al
+            agente.
+          </li>
+          <li>
+            Copiar la llave pública y pegarla en GitHub (Settings → SSH keys).
+          </li>
+          <li><code>ssh -T git@github.com</code>: verificar conexión.</li>
+        </ol>
+
+        <details>
+          <summary>Nota</summary>
+          <p>Normalmente se usa una llave SSH por computadora/usuario.</p>
+        </details>
+      </section>
+
+      <section id="remoto">
+        <h2>Trabajo remoto con GitHub</h2>
+        <ul>
+          <li><code>git clone URL</code>: descargar repo con historial.</li>
+          <li>
+            <code>git remote add origin URL</code>: conectar remoto al repo
+            local (si no fue clonado).
+          </li>
+          <li><code>git remote -v</code>: confirmar remotos.</li>
+          <li>
+            <code>git push -u origin rama</code>: publicar una rama por primera
+            vez.
+          </li>
+          <li>
+            <code>git fetch</code>: traer actualizaciones del remoto (sin
+            mezclar).
+          </li>
+          <li><code>git pull</code>: fetch + merge/rebase según config.</li>
+          <li>
+            <code>git pull --rebase</code>: fetch + rebase (historial lineal).
+          </li>
+          <li>
+            <code>git merge origin/rama</code>: mezclar lo que trajiste con
+            <code>fetch</code> en tu rama actual.
+          </li>
+          <li><code>git remote rm origin</code>: desconectar remoto.</li>
+          <li>
+            <code>git remote set-url origin URL_SSH</code>: cambiar URL del
+            remoto.
+          </li>
+        </ul>
+
+        <details>
+          <summary>Rebase típico en feature antes de merge</summary>
+          <pre>
+git switch feature/mi-cambio
+git fetch origin
+git rebase origin/main
+# resolver conflictos si hay
+git push --force-with-lease</pre
+          >
+          <p>
+            Nota: <code>--force-with-lease</code> es más seguro que
+            <code>--force</code> al reescribir una rama remota.
+          </p>
+        </details>
+      </section>
+
+      <section id="buscar">
+        <h2>Buscar en el código</h2>
+        <ul>
+          <li>
+            <code>git grep palabra</code>: todas las apariciones con archivo.
+          </li>
+          <li>
+            <code>git grep -n palabra</code>: apariciones indicando línea.
+          </li>
+          <li>
+            <code>git grep -c palabra</code>: cuántas apariciones por archivo.
+          </li>
+          <li>
+            <code>git log -S palabra</code>: commits donde cambia la cantidad de
+            apariciones de una palabra.
+          </li>
+        </ul>
+
+        <details>
+          <summary>Ejemplo</summary>
+          <pre>
+git grep -n "useEffect"
+git log -S "select: false"</pre
+          >
+        </details>
+      </section>
+    </main>
+
+    <footer>
+      <p>Fin del documento.</p>
+    </footer>
+  </body>
+</html>

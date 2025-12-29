@@ -36,7 +36,9 @@ main {
   justify-content: center;
   align-items: center;
   margin-left: 280px;
-  padding: 2em 3em;
+  padding: 32px 48px;
+  max-width: 100%;
+  width: 100%;
 }
 
 /* ========================================
@@ -45,21 +47,23 @@ main {
 
 header {
   text-align: center;
-  padding: 2em 0;
-  margin-bottom: 2em;
+  padding: 32px 0;
+  margin-bottom: 32px;
   border-bottom: 2px solid #2c2c2c;
+  width: 100%;
+  max-width: 900px;
 }
 
 header h1 {
-  font-size: 2.5em;
+  font-size: 40px;
   font-weight: 700;
-  margin-bottom: 0.5em;
+  margin-bottom: 8px;
   color: #1a1a1a;
   letter-spacing: -0.5px;
 }
 
 header p {
-  font-size: 1.1em;
+  font-size: 17.6px;
   color: #555555;
   font-style: italic;
 }
@@ -76,14 +80,14 @@ nav {
   height: 100vh;
   background-color: #f9f9f9;
   border-right: 1px solid #dddddd;
-  padding: 2em 1.5em;
+  padding: 32px 24px;
   overflow-y: auto;
   z-index: 100;
 }
 
 nav h2 {
-  font-size: 1.3em;
-  margin-bottom: 0.8em;
+  font-size: 20.8px;
+  margin-bottom: 12.8px;
   color: #1a1a1a;
 }
 
@@ -92,7 +96,7 @@ nav ul {
 }
 
 nav ul li {
-  margin-bottom: 0.6em;
+  margin-bottom: 9.6px;
 }
 
 nav ul li a {
@@ -101,7 +105,7 @@ nav ul li a {
   font-weight: 500;
   transition: color 0.2s ease;
   display: block;
-  padding: 0.3em 0;
+  padding: 4.8px 0;
 }
 
 nav ul li a:hover {
@@ -114,25 +118,25 @@ nav ul li a:hover {
    ======================================== */
 
 h1 {
-  font-size: 2em;
+  font-size: 32px;
   font-weight: 700;
-  margin: 1.5em 0 0.8em 0;
+  margin: 24px 0 12.8px 0;
   color: #1a1a1a;
 }
 
 h2 {
-  font-size: 1.6em;
+  font-size: 25.6px;
   font-weight: 700;
-  margin: 2em 0 1em 0;
-  padding-bottom: 0.3em;
+  margin: 32px 0 16px 0;
+  padding-bottom: 4.8px;
   border-bottom: 1px solid #cccccc;
   color: #1a1a1a;
 }
 
 h3 {
-  font-size: 1.25em;
+  font-size: 20px;
   font-weight: 600;
-  margin: 1.5em 0 0.8em 0;
+  margin: 24px 0 12.8px 0;
   color: #2c2c2c;
 }
 
@@ -141,14 +145,18 @@ h3 {
    ======================================== */
 
 section {
-  margin-bottom: 3em;
+  margin-bottom: 48px;
+  width: 100%;
+  max-width: 900px;
 }
 
 section#notas {
   background-color: #f5f5f5;
-  padding: 1.5em;
+  padding: 24px;
   border-left: 4px solid #555555;
-  margin-bottom: 2.5em;
+  margin-bottom: 40px;
+  width: 100%;
+  max-width: 900px;
 }
 
 /* ========================================
@@ -157,13 +165,13 @@ section#notas {
 
 ul,
 ol {
-  margin-left: 2em;
-  margin-bottom: 1em;
+  margin-left: 32px;
+  margin-bottom: 16px;
 }
 
 ul li,
 ol li {
-  margin-bottom: 0.8em;
+  margin-bottom: 12.8px;
   line-height: 1.7;
 }
 
@@ -187,9 +195,9 @@ a:hover {
 
 code {
   font-family: "Consolas", "Monaco", "Courier New", monospace;
-  font-size: 0.9em;
+  font-size: 14.4px;
   background-color: #f5f5f5;
-  padding: 0.2em 0.4em;
+  padding: 3.2px 6.4px;
   border: 1px solid #e0e0e0;
   color: #1a1a1a;
 }
@@ -197,8 +205,8 @@ code {
 pre {
   background-color: #f5f5f5;
   border-left: 4px solid #555555;
-  padding: 1.2em;
-  margin: 1.5em 0;
+  padding: 19.2px;
+  margin: 24px 0;
   overflow-x: auto;
   line-height: 1.5;
 }
@@ -207,7 +215,7 @@ pre code {
   background-color: transparent;
   border: none;
   padding: 0;
-  font-size: 0.95em;
+  font-size: 15.2px;
 }
 
 /* ========================================
@@ -215,8 +223,8 @@ pre code {
    ======================================== */
 
 details {
-  margin: 1.5em 0;
-  padding: 1em;
+  margin: 24px 0;
+  padding: 16px;
   background-color: #fafafa;
   border: 1px solid #dddddd;
 }
@@ -227,7 +235,7 @@ summary {
   color: #2c2c2c;
   -webkit-user-select: none;
   user-select: none;
-  padding: 0.5em;
+  padding: 8px;
   transition: background-color 0.2s ease;
 }
 
@@ -236,12 +244,12 @@ summary:hover {
 }
 
 details[open] summary {
-  margin-bottom: 1em;
+  margin-bottom: 16px;
   border-bottom: 1px solid #dddddd;
 }
 
 details p {
-  margin: 0.8em 0;
+  margin: 12.8px 0;
 }
 
 /* ========================================
@@ -249,7 +257,7 @@ details p {
    ======================================== */
 
 p {
-  margin-bottom: 1em;
+  margin-bottom: 16px;
   color: #2c2c2c;
 }
 
@@ -287,7 +295,7 @@ em {
   main {
     margin-left: 0;
     max-width: 100%;
-    padding: 1em;
+    padding: 16px;
   }
 
   section {
@@ -320,19 +328,19 @@ em {
     height: auto;
     border-right: none;
     border-bottom: 1px solid #dddddd;
-    padding: 1em 1.5em;
+    padding: 16px 24px;
   }
 
   main {
     margin-left: 0;
-    padding: 1em 1.5em;
+    padding: 16px 24px;
   }
 
   header h1 {
-    font-size: 2em;
+    font-size: 32px;
   }
 
   h2 {
-    font-size: 1.4em;
+    font-size: 22.4px;
   }
 }

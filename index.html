@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css" />
     <title>Comandos de Git y GitHub</title>
   </head>
   <body>
@@ -316,11 +317,12 @@ git checkout main</pre
             <code>eval "$(ssh-agent -s)"</code>: iniciar/verificar agente SSH.
           </li>
           <li>
-            <code>ssh-add ~/.ssh/id_ed25519</code>: agregar llave privada al
-            agente.
+            <code>ssh-add --apple-use-keychain ~/.ssh/id_ed25519</code>: agregar
+            llave privada al agente.
           </li>
           <li>
-            Copiar la llave pública y pegarla en GitHub (Settings → SSH keys).
+            pbcopy < ~/.ssh/id_ed25519.pub: Copiar la llave pública y pegarla en
+            GitHub (Settings → SSH keys).
           </li>
           <li><code>ssh -T git@github.com</code>: verificar conexión.</li>
         </ol>

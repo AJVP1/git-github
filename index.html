@@ -150,13 +150,13 @@ git lg</pre
           <li>
             <code>git branch nombre</code>: crear rama (no cambia a ella).
           </li>
+          <li><code>git branch -m viejo nuevo</code>: renombrar rama local.</li>
+          <li><code>git branch -D nombre</code>: borrar rama local.</li>
           <li><code>git checkout rama</code>: moverse a otra rama.</li>
           <li>
             <code>git checkout -b nombre</code>: crear y moverse a una nueva
             rama.
           </li>
-          <li><code>git branch -m viejo nuevo</code>: renombrar rama local.</li>
-          <li><code>git branch -D nombre</code>: borrar rama local.</li>
           <li>
             <code>git merge rama</code>: fusiona <em>rama</em> en la rama
             actual.
@@ -255,15 +255,13 @@ git lg</pre
         <details>
           <summary>Volver a un commit (modo detached HEAD)</summary>
           <p>
-            <code>git checkout commit</code> o
-            <code>git switch --detach commit</code>
-            te deja en “detached HEAD” (no estás en una rama). Para volver:
-            <code>git switch rama</code>.
+            <code>git checkout commit</code> o te deja en “detached HEAD” (no
+            estás en una rama). Para volver: <code>git checkout rama</code>.
           </p>
           <pre>
-git switch --detach 1a2b3c4
+git checkout 1a2b3c4
 # mirar / probar algo...
-git switch main</pre
+git checkout main</pre
           >
         </details>
       </section>

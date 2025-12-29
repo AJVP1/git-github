@@ -267,7 +267,7 @@ git checkout main</pre
       </section>
 
       <section id="tags">
-        <h2>Tags / etiquetas</h2>
+        <h2>Tags / etiquetas (tags)</h2>
         <ul>
           <li>
             <code>git tag -a tag -m "mensaje" commit</code>: crea tag anotado
@@ -287,12 +287,8 @@ git checkout main</pre
       </section>
 
       <section id="auditoria">
-        <h2>Auditoría: quién hizo qué</h2>
+        <h2>Auditoría: quién hizo qué (shortlog, blame)</h2>
         <ul>
-          <li>
-            <code>git reflog</code>: historial de movimientos de HEAD (útil para
-            recuperar).
-          </li>
           <li><code>git shortlog</code>: commits por autor.</li>
           <li><code>git shortlog -sn</code>: cuántos commits por autor.</li>
           <li>
@@ -307,38 +303,6 @@ git checkout main</pre
             <code>git blame archivo -L linea_inicial,linea_final</code>: blame
             por rango.
           </li>
-        </ul>
-      </section>
-
-      <section id="stash">
-        <h2>Stash</h2>
-        <ul>
-          <li><code>git stash</code>: guarda cambios temporalmente.</li>
-          <li>
-            <code>git stash push -m "mensaje"</code>: stash con mensaje (forma
-            moderna).
-          </li>
-          <li><code>git stash list</code>: lista de stashes.</li>
-          <li>
-            <code>git stash pop</code>: aplica el último stash y lo elimina.
-          </li>
-          <li>
-            <code>git stash pop stash@{n}</code>: aplica un stash específico y
-            lo elimina.
-          </li>
-          <li>
-            <code>git stash apply stash@{n}</code>: aplica un stash específico
-            sin eliminarlo.
-          </li>
-          <li>
-            <code>git stash branch rama</code>: crea rama y aplica cambios del
-            último stash.
-          </li>
-          <li><code>git stash drop</code>: borra el último stash.</li>
-          <li>
-            <code>git stash drop stash@{n}</code>: borra un stash específico.
-          </li>
-          <li><code>git stash clear</code>: borra todos los stashes.</li>
         </ul>
       </section>
 
@@ -405,7 +369,7 @@ git checkout main</pre
         <details>
           <summary>Rebase típico en feature antes de merge</summary>
           <pre>
-git switch feature/mi-cambio
+git checkout feature/mi-cambio
 git fetch origin
 git rebase origin/main
 # resolver conflictos si hay
